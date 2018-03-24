@@ -451,6 +451,7 @@ class ElectrumX(SessionBase):
             'server.features': self.server_features,
             'server.peers.subscribe': self.peers_subscribe,
             'server.version': self.server_version,
+            'blockchain.transaction.get_height': controller.transaction_get_height,
         }
 
         if ptuple < (1, 1):

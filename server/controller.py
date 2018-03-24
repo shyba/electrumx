@@ -855,6 +855,18 @@ class Controller(ServerBase):
         self.assert_tx_hash(tx_hash)
         return await self.daemon_request('getrawtransaction', tx_hash, verbose)
 
+    async def transaction_get_height(self, tx_hash):
+        self.assert_tx_hash(tx_hash)
+        transaction_info = await self.daemon_request('getrawtransaction', tx_hash, True)
+        if transaction_info and 'hex' in transaction_info and 'confirmations' in transaction_info:
+            # an unconfirmed transaction from lbrycrdd will not have a 'confirmations' field
+            height = self.bp.db_height
+            height = height - transaction_info['confirmations']
+            return height
+        elif transaction_info and 'hex' in transaction_info:
+            return -1
+        return None
+
     async def transaction_get_1_0(self, tx_hash, height=None):
         '''Return the serialized raw transaction given its hash
 
