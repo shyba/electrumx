@@ -16,11 +16,11 @@ import time
 from collections import defaultdict
 from functools import partial
 
-from server.daemon import DaemonError
-from server.version import VERSION
-from lib.hash import hash_to_str
-from lib.util import chunks, formatted_time, LoggedClass
-import server.db
+from electrumx.server.daemon import DaemonError
+from electrumx.server.version import VERSION
+from electrumx.lib.hash import hash_to_str
+from electrumx.lib.util import chunks, formatted_time, LoggedClass
+from electrumx.server import db
 
 
 class Prefetcher(LoggedClass):
@@ -133,7 +133,7 @@ class ChainError(Exception):
     '''Raised on error processing blocks.'''
 
 
-class BlockProcessor(server.db.DB):
+class BlockProcessor(db.DB):
     '''Process blocks and update the DB state to match.
 
     Employ a prefetcher to prefetch blocks in batches for processing.

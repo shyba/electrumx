@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from lib import util
+from electrumx.lib import util
 
 
 class LoggedClassTest(util.LoggedClass):

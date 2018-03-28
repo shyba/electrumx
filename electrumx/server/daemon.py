@@ -18,9 +18,9 @@ from time import strptime
 
 import aiohttp
 
-from lib.util import LoggedClass, int_to_varint, hex_to_bytes
-from lib.hash import hex_str_to_hash
-from lib.jsonrpc import JSONRPC
+from electrumx.lib.util import LoggedClass, int_to_varint, hex_to_bytes
+from electrumx.lib.hash import hex_str_to_hash
+from electrumx.lib.jsonrpc import JSONRPC
 
 
 class DaemonError(Exception):

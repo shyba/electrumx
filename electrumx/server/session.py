@@ -11,11 +11,11 @@ import codecs
 import time
 from functools import partial
 
-from lib.hash import sha256, hash_to_str
-from lib.jsonrpc import JSONSession, RPCError, JSONRPCv2, JSONRPC
-import lib.util as util
-from server.daemon import DaemonError
-import server.version as version
+from electrumx.lib.hash import sha256, hash_to_str
+from electrumx.lib.jsonrpc import JSONSession, RPCError, JSONRPCv2, JSONRPC
+import electrumx.lib.util as util
+from electrumx.server.daemon import DaemonError
+import electrumx.server.version as version
 
 
 class SessionBase(JSONSession):

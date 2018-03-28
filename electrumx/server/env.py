@@ -12,10 +12,10 @@ import resource
 from collections import namedtuple
 from ipaddress import ip_address
 
-from lib.coins import Coin
-from lib.env_base import EnvBase
-import lib.util as lib_util
-import server.version as version
+from electrumx.lib.coins import Coin
+from electrumx.lib.env_base import EnvBase
+import electrumx.lib.util as lib_util
+import electrumx.server.version as version
 
 
 NetIdentity = namedtuple('NetIdentity', 'host tcp_port ssl_port nick_suffix')
@@ -27,15 +27,15 @@ class Env(EnvBase):
     # Peer discovery
     PD_OFF, PD_SELF, PD_ON = range(3)
 
-    def __init__(self):
+    def __init__(self, coin=False):
         super().__init__()
         self.obsolete(['UTXO_MB', 'HIST_MB', 'NETWORK'])
         self.db_dir = self.required('DB_DIRECTORY')
         self.db_engine = self.default('DB_ENGINE', 'leveldb')
         self.daemon_url = self.required('DAEMON_URL')
-        coin_name = self.required('COIN').strip()
+        coin_name = coin.__class__.__name__ if coin else self.required('COIN').strip()
         network = self.default('NET', 'mainnet').strip()
-        self.coin = Coin.lookup_coin_class(coin_name, network)
+        self.coin = coin or Coin.lookup_coin_class(coin_name, network)
         self.cache_MB = self.integer('CACHE_MB', 1200)
         self.host = self.default('HOST', 'localhost')
         self.reorg_limit = self.integer('REORG_LIMIT', self.coin.REORG_LIMIT)

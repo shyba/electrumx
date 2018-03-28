@@ -10,7 +10,7 @@
 
 from os import environ
 
-import lib.util as lib_util
+import electrumx.lib.util as lib_util
 
 
 class EnvBase(lib_util.LoggedClass):

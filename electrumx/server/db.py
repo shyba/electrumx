@@ -16,10 +16,10 @@ from struct import pack, unpack
 from bisect import bisect_left, bisect_right
 from collections import namedtuple
 
-import lib.util as util
-from lib.hash import hash_to_str
-from server.storage import db_class
-from server.version import VERSION, PROTOCOL_MIN, PROTOCOL_MAX
+import electrumx.lib.util as util
+from electrumx.lib.hash import hash_to_str
+from electrumx.server.storage import db_class
+from electrumx.server.version import VERSION, PROTOCOL_MIN, PROTOCOL_MAX
 
 
 UTXO = namedtuple("UTXO", "tx_num tx_pos tx_hash height value")
@@ -246,7 +246,7 @@ class DB(util.LoggedClass):
         headers_concat, headers_count = self.read_headers(height, count)
         if headers_count != count:
             raise self.DBError('only got {:,d} headers starting at {:,d}, not '
-                               '{:,d}'.format(headers_count, start, count))
+                               '{:,d}'.format(headers_count, height, count))
         offset = 0
         headers = []
         for n in range(count):

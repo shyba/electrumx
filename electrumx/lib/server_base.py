@@ -12,7 +12,7 @@ import sys
 import time
 from functools import partial
 
-import lib.util as util
+import electrumx.lib.util as util
 
 
 class ServerBase(util.LoggedClass):

@@ -12,10 +12,10 @@ import itertools
 import time
 from collections import defaultdict
 
-from lib.hash import hash_to_str, hex_str_to_hash
-import lib.util as util
-from server.daemon import DaemonError
-from server.db import UTXO
+from electrumx.lib.hash import hash_to_str, hex_str_to_hash
+import electrumx.lib.util as util
+from electrumx.server.daemon import DaemonError
+from electrumx.server.db import UTXO
 
 
 class MemPool(util.LoggedClass):

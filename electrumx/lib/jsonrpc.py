@@ -38,7 +38,7 @@ import numbers
 import time
 import traceback
 
-import lib.util as util
+import electrumx.lib.util as util
 
 
 class RPCError(Exception):

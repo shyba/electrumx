@@ -16,8 +16,8 @@ import json
 from functools import partial
 from os import environ
 
-from lib.jsonrpc import JSONSession, JSONRPCv2
-from server.controller import Controller
+from electrumx.lib.jsonrpc import JSONSession, JSONRPCv2
+from electrumx.server.controller import Controller
 
 
 class RPCClient(JSONSession):

@@ -1,9 +1,9 @@
 import asyncio
 from unittest import mock
 
-from lib.jsonrpc import RPCError
-from server.env import Env
-from server.controller import Controller
+from electrumx.lib.jsonrpc import RPCError
+from electrumx.server.env import Env
+from electrumx.server.controller import Controller
 
 loop = asyncio.get_event_loop()
 

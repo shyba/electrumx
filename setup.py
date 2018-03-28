@@ -1,5 +1,5 @@
 import setuptools
-from server.version import VERSION
+from electrumx.server.version import VERSION
 
 
 setuptools.setup(
@@ -12,7 +12,8 @@ setuptools.setup(
     # "tribus_hash" package is required to sync Denarius network.
     # "blake256" package is required to sync Decred network.
     install_requires=['aiorpcX >= 0.4.4', 'plyvel', 'pylru', 'aiohttp >= 1'],
-    packages=setuptools.find_packages(exclude=['tests']),
+    #packages=setuptools.find_packages(exclude=['tests']),
+    packages=['electrumx'],
     description='ElectrumX Server',
     author='Neil Booth',
     author_email='kyuupichan@gmail.com',

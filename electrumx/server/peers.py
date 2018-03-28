@@ -17,10 +17,10 @@ from functools import partial
 
 import aiorpcx
 
-from lib.jsonrpc import JSONSession
-from lib.peer import Peer
-import lib.util as util
-import server.version as version
+from electrumx.lib.jsonrpc import JSONSession
+from electrumx.lib.peer import Peer
+import electrumx.lib.util as util
+import electrumx.server.version as version
 
 
 PEER_GOOD, PEER_STALE, PEER_NEVER, PEER_BAD = range(4)
