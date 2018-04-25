@@ -585,13 +585,15 @@ class JSONSessionBase(util.LoggedClass):
         params = inspect.signature(handler).parameters
         names = list(params)
         min_args = sum(p.default is p.empty for p in params.values())
+        vararg_kind = inspect.Parameter.VAR_POSITIONAL
+        has_varargs = sum(p.kind == vararg_kind for p in params.values())
 
         if len(args) < min_args:
             raise RPCError('too few arguments to {}: expected {:d} got {:d}'
                            .format(method, min_args, len(args)),
                            JSONRPC.INVALID_ARGS)
 
-        if len(args) > len(params):
+        if not has_varargs and len(args) > len(params):
             raise RPCError('too many arguments to {}: expected {:d} got {:d}'
                            .format(method, len(params), len(args)),
                            JSONRPC.INVALID_ARGS)
@@ -607,9 +609,9 @@ class JSONSessionBase(util.LoggedClass):
                                .format(', '.join(bad_names)))
 
         if inspect.iscoroutinefunction(handler):
-            return await handler(**kw_args)
+            return await handler(**kw_args) if not has_varargs else await handler(*args)
         else:
-            return handler(**kw_args)
+            return handler(**kw_args) if not has_varargs else handler(*args)
 
     # ---- External Interface ----
 
